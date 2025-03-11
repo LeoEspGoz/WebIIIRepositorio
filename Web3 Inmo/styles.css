@@ -1,0 +1,207 @@
+/* Estilos Generales */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Barra Superior */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #7a7979;
+    font-size: 14px;
+}
+
+.social-media img {
+    width: 20px;
+    margin-left: 10px;
+}
+
+/* Barra de Navegación */
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #007BFF;
+}
+
+.btn {
+    background: #007BFF;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Sección Hero */
+.hero {
+    position: relative;
+    background: url('background.jpg') no-repeat center center/cover;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.buttons button {
+    background: #007BFF;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.buttons button:hover {
+    background: #0056b3;
+}
+/* Sección de Soluciones */
+.soluciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 10%;
+    background: #f9f9f9;
+}
+
+.soluciones-container {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    align-items: center;
+}
+
+.soluciones-img {
+    position: relative;
+    flex: 1;
+}
+
+.soluciones-img img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-card {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.info-card p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.info-card img {
+    width: 20px;
+    height: 20px;
+}
+
+.soluciones-texto {
+    flex: 1;
+}
+
+.soluciones-texto h2 {
+    font-size: 28px;
+    color: #3498db;
+    margin-bottom: 15px;
+}
+
+.soluciones-texto p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.soluciones-texto ul {
+    list-style: none;
+    padding: 0;
+}
+
+.soluciones-texto li {
+    font-size: 16px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.soluciones-texto li::before {
+    content: "✔";
+    color: #3498db;
+}
+
+.btn-mas {
+    background: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-mas:hover {
+    background: #2980b9;
+}
