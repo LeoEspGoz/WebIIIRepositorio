@@ -205,3 +205,56 @@ nav ul li a:hover {
 .btn-mas:hover {
     background: #2980b9;
 }
+
+
+
+
+
+
+/* Hero Section */
+.hero {
+    background: url('tu-imagen-de-fondo.jpg') no-repeat center center/cover;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+/* Agregar un overlay oscuro para mejorar la visibilidad del texto */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Capa oscura */
+}
+
+/* Contenido dentro del Hero */
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.hero .buttons button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.hero .buttons button:hover {
+    opacity: 0.;
+}
