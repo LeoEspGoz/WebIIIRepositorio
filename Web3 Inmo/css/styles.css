@@ -78,7 +78,7 @@ nav ul li a:hover {
 /* Sección Hero */
 .hero {
     position: relative;
-    background: url('background.jpg') no-repeat center center/cover;
+    background: url('/background.jpg') no-repeat center center/cover;
     height: 500px;
     display: flex;
     align-items: center;
@@ -98,6 +98,7 @@ nav ul li a:hover {
     margin-bottom: 20px;
 }
 
+
 .buttons button {
     background: #007BFF;
     border: none;
@@ -107,7 +108,7 @@ nav ul li a:hover {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    transition: background 0.3s;
+   
 }
 
 .buttons button:hover {
@@ -211,59 +212,154 @@ nav ul li a:hover {
 .btn-mas:hover {
     background: #2980b9;
 }
-
-
-
-
-
-
-/* Hero Section */
-.hero {
-    background: url('tu-imagen-de-fondo.jpg') no-repeat center center/cover;
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    position: relative;
+/* Estilos para la sección de categorías */
+.categorias {
+    padding: 50px 20px;
+    background-color: #f9f9f9;
 }
 
-/* Agregar un overlay oscuro para mejorar la visibilidad del texto */
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
+.categorias h2 {
+    font-size: 28px;
+    color: #337ab7;
+    margin-bottom: 20px;
+}
+
+/* Contenedor de todas las categorías */
+.categorias-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Estilos para cada categoría */
+.categoria {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+.categoria:hover {
+    transform: scale(1.05);
+}
+
+/* Contenedor de la imagen para mantener proporciones */
+.categoria-img {
+    position: relative;
+    width: 100%;
+    height: 250px; /* Altura fija para uniformidad */
+    overflow: hidden;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* Ajuste de la imagen para ocupar todo el contenedor */
+.categoria-img img {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Capa oscura */
+    object-fit: cover;
 }
 
-/* Contenido dentro del Hero */
-.hero-content {
-    position: relative;
-    z-index: 1;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.hero .buttons button {
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    margin: 10px;
-    cursor: pointer;
+/* Estilos para la etiqueta de Lo Más Buscado */
+.etiqueta {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #0066ff;
+    color: white;
+    font-size: 12px;
+    padding: 5px 10px;
     border-radius: 5px;
+    transform: rotate(-20deg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.hero .buttons button:hover {
-    opacity: 0.;
+/* Texto de descripción debajo de cada imagen */
+.categoria p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Botón para ver todas las categorías */
+.ver-todas {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.ver-todas:hover {
+    background-color: #e9e9e9;
 }
 .footer{
     text-align: center;
+}
+@media (max-width: 768px) {
+    .top-bar, .nav-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .hero {
+        height: 300px;
+        padding: 20px;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .buttons button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .soluciones {
+        flex-direction: column;
+        padding: 30px 5%;
+    }
+
+    .soluciones-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .soluciones-texto h2 {
+        font-size: 22px;
+    }
+
+    .soluciones-texto p, .soluciones-texto li {
+        font-size: 14px;
+    }
+
+    .categorias-container {
+        grid-template-columns: 1fr;
+    }
+
+    .categoria-img {
+        height: 180px;
+    }
+
+    .btn, .btn-mas, .ver-todas {
+        width: 100%;
+        text-align: center;
+    }
 }
