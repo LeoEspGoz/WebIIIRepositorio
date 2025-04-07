@@ -1,7 +1,7 @@
 /* Estilos Generales */
 body, html {
     margin: 0;
-    padding: 0;
+    padding: 3px;
     font-family: Arial, sans-serif;
 }
 
@@ -12,6 +12,7 @@ body, html {
     padding: 10px 20px;
     background: #7a7979;
     font-size: 14px;
+    color: white;
 }
 
 .social-media img {
@@ -59,6 +60,7 @@ nav ul li a {
 
 nav ul li a:hover {
     color: #007BFF;
+    
 }
 
 .btn {
@@ -67,6 +69,10 @@ nav ul li a:hover {
     padding: 8px 15px;
     border-radius: 5px;
     text-decoration: none;
+}
+.btn:hover{
+    background: white;
+    color: black;
 }
 
 /* Sección Hero */
@@ -169,7 +175,7 @@ nav ul li a:hover {
 
 .soluciones-texto p {
     font-size: 16px;
-    color: #333;
+    color: #828181;
     margin-bottom: 15px;
 }
 
@@ -180,7 +186,7 @@ nav ul li a:hover {
 
 .soluciones-texto li {
     font-size: 16px;
-    color: #555;
+    color: #a9a6a6;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -257,4 +263,7 @@ nav ul li a:hover {
 
 .hero .buttons button:hover {
     opacity: 0.;
+}
+.footer{
+    text-align: center;
 }
