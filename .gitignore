@@ -1,0 +1,36 @@
+# Node modules (dependencias de npm)
+node_modules/
+
+# Archivos de log
+*.log
+
+# Archivos temporales de npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de entorno (si tienes variables sensibles como contraseñas)
+.env
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de la carpeta 'public' si es que contienen archivos generados
+/public/bundle/  # Si generas archivos empaquetados o transpilados en esta carpeta
+
+# Archivos específicos de IDEs y editores de código
+.vscode/
+.idea/
+*.swp
+
+# Archivos temporales generados por sistemas operativos
+*.bak
+*.tmp
+
+# Archivos de caché generados por npm
+.npm/
+
+# Si usas bases de datos locales, puedes agregar también:
+*.sql
+*.sqlite

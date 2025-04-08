@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inmobiliaria Uriangato</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="top-bar">
+            <span>+52 4451256507</span>
+            <span>InmoUri@gmail.com</span>
+            <div class="social-media">
+                <a href="#"><img src="img/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="img/instagram-icon.png" alt="Instagram"></a>
+            </div>
+        </div>
+        <div class="nav-bar">
+            <div class="logo">
+                <img src="img/logo.png" alt="Inmobiliaria Uriangato">
+                <span>Inmobiliaria Uriangato</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="Compra.html">Propiedades</a></li>
+                    <li><a href="#tasaciones">Tasaciones</a></li>
+                    <li><a href="#asesores">Nuestros Asesores</a></li>
+                    <li><a href="#contacto" class="btn">Contacto</a></li>
+                    <li id="logoutButton" style="display: none;"><a href="#" onclick="logout()">Cerrar Sesión</a></li> 
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Encuentra tu lugar ideal</h1>
+            <div class="buttons">
+                <button>Quiero Comprar</button>
+                <button>Quiero Vender</button>
+                <button>Quiero Alquilar</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="soluciones">
+        <div class="soluciones-container">
+            <div class="soluciones-img">
+                <img src="img/edificio.png" alt="Edificio moderno">
+                <div class="info-card">
+                    <p>Equipo formado por expertos en ventas</p>
+                    <p>Más de 10 años de experiencia en el rubro</p>
+                </div>
+            </div>
+            <div class="soluciones-texto">
+                <h2>Generando Soluciones</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ad, facere ipsum accusantium illum.</p>
+                <button class="btn-mas">Ver Más</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Inmobiliaria Uriangato. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Verificar si hay sesión activa al cargar la página
+            fetch('http://localhost:3000/session', { method: 'GET' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.ok) {
+                        // Si la sesión está activa, mostrar el botón de Cerrar Sesión
+                        document.getElementById('logoutButton').style.display = 'block';
+                    } else {
+                        // Si no hay sesión activa, redirigir al login
+                        window.location.href = 'login.html';
+                    }
+                })
+                .catch(err => console.error('Error:', err));
+        });
+
+        // Función para cerrar sesión
+        function logout() {
+            fetch('http://localhost:3000/logout', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.ok) {
+                        // Redirigir al login después de cerrar sesión
+                        window.location.href = 'login.html';
+                    }
+                })
+                .catch(err => console.error('Error al cerrar sesión:', err));
+        }
+    </script>
+</body>
+
+</html>

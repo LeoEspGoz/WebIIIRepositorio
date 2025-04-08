@@ -303,6 +303,19 @@ nav ul li a:hover {
 .footer{
     text-align: center;
 }
+
+#logoutButton a {
+    color: #fff;
+    background-color: #ff5733;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  #logoutButton a:hover {
+    background-color: #e74c3c;
+  }
+  
 @media (max-width: 768px) {
     .top-bar, .nav-bar {
         flex-direction: column;
