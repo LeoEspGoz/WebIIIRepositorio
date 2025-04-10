@@ -315,6 +315,17 @@ nav ul li a:hover {
   #logoutButton a:hover {
     background-color: #e74c3c;
   }
+  #loginButton a {
+    color: #fff;
+    background-color: #55ff33;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  #logintButton a:hover {
+    background-color: #b7ec53;
+  }
   
 @media (max-width: 768px) {
     .top-bar, .nav-bar {

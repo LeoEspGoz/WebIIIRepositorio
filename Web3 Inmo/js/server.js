@@ -1,25 +1,25 @@
 const express = require('express');
 const mysql = require('mysql');
-const cors = require('cors');
 const path = require('path');
-const session = require('express-session'); // Importa express-session
+const session = require('express-session');
 
 const app = express();
 const PORT = 3000;
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Middleware para servir archivos estáticos
 app.use(express.static(path.join(__dirname, '../public')));
+
+// Middleware para procesar solicitudes JSON
+app.use(express.json());
 
 // Configuración de sesiones
 app.use(session({
-  secret: 'mi_clave_secreta',  // Cambia esto por una clave secreta y robusta
+  secret: 'root',
   resave: false,
   saveUninitialized: true,
 }));
 
-// Conexión MySQL
+// Conexión a la base de datos MySQL
 const conexion = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -32,55 +32,47 @@ conexion.connect(err => {
   console.log('Conexión a MySQL exitosa');
 });
 
-// Ruta de login
+// Ruta para iniciar sesión
 app.post('/login', (req, res) => {
   const { usuario, contrasena } = req.body;
 
   const query = 'SELECT * FROM usuario WHERE usuario = ? AND contrasena = ?';
   conexion.query(query, [usuario, contrasena], (err, resultados) => {
     if (err) {
+      console.error('Error al hacer login:', err);
       return res.status(500).json({ ok: false, error: 'Error en el servidor' });
     }
 
     if (resultados.length > 0) {
-      // Login exitoso, guardar la sesión
       req.session.usuario = usuario;  // Guardar usuario en sesión
       res.json({ ok: true });
     } else {
-      // Credenciales incorrectas
-      res.json({ ok: false });
+      res.status(401).json({ ok: false, error: 'Credenciales incorrectas' });
     }
   });
 });
 
-// Ruta para verificar sesión
-app.get('/session', (req, res) => {
-  if (req.session.usuario) {
-    res.json({ ok: true });
-  } else {
-    res.json({ ok: false });
-  }
-});
+// Ruta para registrar la propiedad
+app.post('/registrar-propiedad', (req, res) => {
+  const { titulo, descripcion, precio, ubicacion, tipo, operacion, imagen, id_admin } = req.body;
 
-// Ruta de logout
-app.post('/logout', (req, res) => {
-  req.session.destroy((err) => {
+  // Validación básica de datos
+  if (!titulo || !precio || !tipo || !operacion || !id_admin) {
+    return res.status(400).json({ ok: false, error: 'Faltan datos requeridos' });
+  }
+
+  const query = `
+    INSERT INTO propiedad (titulo, descripcion, precio, ubicacion, tipo, operacion, imagen, id_admin)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  conexion.query(query, [titulo, descripcion, precio, ubicacion, tipo, operacion, imagen, id_admin], (err, result) => {
     if (err) {
-      return res.status(500).json({ ok: false, error: 'Error al cerrar sesión' });
+      console.error('Error al registrar la propiedad:', err);
+      return res.status(500).json({ ok: false, error: 'Error al registrar la propiedad' });
     }
-    res.json({ ok: true });
+    res.json({ ok: true, message: 'Propiedad registrada exitosamente' });
   });
-});
-
-// Ruta principal
-app.get('/', (req, res) => {
-  if (req.session.usuario) {
-    // Si hay sesión iniciada, redirigir a index
-    res.sendFile(path.join(__dirname, '../public/index.html'));
-  } else {
-    // Si no hay sesión, redirigir al login
-    res.sendFile(path.join(__dirname, '../public/login.html'));
-  }
 });
 
 // Iniciar servidor
