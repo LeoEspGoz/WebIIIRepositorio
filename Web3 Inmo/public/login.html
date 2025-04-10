@@ -7,19 +7,26 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Iniciar Sesión</h2>
-        <form id="loginForm">
-            <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" name="usuario" required>
-            <br>
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena" required>
-            <br>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-    </div>
-
-    <script src="js/login.js"></script>
+    <h1>Inciar sesión</h1>
+    <form id="formLogin">
+      <input type="text" name="usuario" placeholder="Usuario" required>
+      <input type="password" name="contrasena" placeholder="Contraseña" required>
+      <button type="submit">Iniciar sesión</button>
+    </form>
+    <script src="js/login.js">
+         document.addEventListener("DOMContentLoaded", function () {
+    fetch('http://localhost:3000/session', {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          // Ya hay sesión activa, redirigir
+          window.location.href = 'index.html';
+        }
+      });
+  });
+    </script>
 </body>
 </html>

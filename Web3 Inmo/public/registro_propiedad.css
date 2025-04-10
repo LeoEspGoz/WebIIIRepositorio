@@ -114,3 +114,23 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+#logoutButton a {
+    color: #fff;
+    background-color: #ff5733;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  #logoutButton a:hover {
+    background-color: #4873ff;
+  }
+footer{
+    text-align: center;
+    background: black;
+    color: white;
+    height: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 2rem;
+}

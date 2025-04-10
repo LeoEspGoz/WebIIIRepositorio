@@ -1,11 +1,44 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Aquí va el código que debe ejecutarse después de que el DOM esté cargado.
+document.addEventListener('DOMContentLoaded', function () {
+    // Verificar sesión
+    fetch('http://localhost:3000/session', {
+        method: 'GET',
+        credentials: 'include'
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.ok) {
+                // Hay sesión activa
+                document.getElementById('logoutButton').style.display = 'block';
+                document.getElementById('loginButton').style.display = 'none';
+            } else {
+                // No hay sesión
+                document.getElementById('logoutButton').style.display = 'none';
+                document.getElementById('loginButton').style.display = 'block';
+            }
+        })
+        .catch(err => console.error('Error al verificar sesión:', err));
+
+    // Función para cerrar sesión
+    window.logout = function () {
+        fetch('http://localhost:3000/logout', {
+            method: 'POST',
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.ok) {
+                    window.location.href = 'index.html';
+                }
+            })
+            .catch(err => console.error('Error al cerrar sesión:', err));
+    };
+
+    // Lógica del formulario
     const form = document.getElementById('registroForm');
     if (form) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Obtener los datos del formulario
             const titulo = document.getElementById('titulo').value;
             const descripcion = document.getElementById('descripcion').value;
             const precio = document.getElementById('precio').value;
@@ -13,9 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const tipo = document.getElementById('tipo').value;
             const operacion = document.getElementById('operacion').value;
             const imagen = document.getElementById('imagen').value;
-            const id_admin = 1; // Asumiendo que el id del admin está estático por ahora.
+            const id_admin = 1; // Cambiar esto cuando uses sesión real
 
-            // Enviar los datos al servidor
             fetch('http://localhost:3000/registrar-propiedad', {
                 method: 'POST',
                 headers: {
@@ -32,19 +64,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     id_admin
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.ok) {
-                    alert(data.message); // Mostrar mensaje de éxito
-                    // Redirigir o limpiar formulario, etc.
-                } else {
-                    alert('Error al registrar la propiedad: ' + data.error); // Mostrar error
-                }
-            })
-            .catch(error => {
-                console.error('Error al enviar la solicitud:', error);
-                alert('Hubo un error al registrar la propiedad.');
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert(data.message);
+                        // Limpiar formulario o redirigir
+                    } else {
+                        alert('Error al registrar la propiedad: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al enviar la solicitud:', error);
+                    alert('Hubo un error al registrar la propiedad.');
+                });
         });
     } else {
         console.error('Formulario no encontrado');

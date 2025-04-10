@@ -28,7 +28,6 @@
                     <li><a href="registro_propiedad.html">Registrar propiedad</a></li>
                     <li><a href="Compra.html">Propiedades</a></li>
                     <li><a href="#tasaciones">Tasaciones</a></li>
-                    <li><a href="#asesores">Nuestros Asesores</a></li>
                     <li><a href="#contacto" class="btn">Contacto</a></li>
                     <li id="loginButton"><a href="login.html" class="btn">Admin</a></li>
                     <li id="logoutButton" style="display: none;"><a href="#" onclick="logout()">Cerrar Sesión</a></li> 
@@ -70,34 +69,40 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Verificar si hay sesión activa al cargar la página
-            fetch('http://localhost:3000/session', { method: 'GET' })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.ok) {
-                        // Si la sesión está activa, mostrar el botón de Cerrar Sesión
-                        document.getElementById('logoutButton').style.display = 'block';
-                    } else {
-                        // Si no hay sesión activa, redirigir al login
-                        window.location.href = 'login.html';
-                    }
-                })
-                .catch(err => console.error('Error:', err));
-        });
-
-        // Función para cerrar sesión
-        function logout() {
-            fetch('http://localhost:3000/logout', { method: 'POST' })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.ok) {
-                        // Redirigir al login después de cerrar sesión
-                        window.location.href = 'login.html';
-                    }
-                })
-                .catch(err => console.error('Error al cerrar sesión:', err));
+          document.addEventListener("DOMContentLoaded", function () {
+    fetch('http://localhost:3000/session', {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          // Hay sesión activa
+          document.getElementById('logoutButton').style.display = 'block';
+          document.getElementById('loginButton').style.display = 'none';
+        } else {
+          // No hay sesión
+          document.getElementById('logoutButton').style.display = 'none';
+          document.getElementById('loginButton').style.display = 'block';
         }
+      })
+      .catch(err => console.error('Error al verificar sesión:', err));
+  });
+
+  function logout() {
+    fetch('http://localhost:3000/logout', {
+      method: 'POST',
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          window.location.href = 'index.html';
+        }
+      })
+      .catch(err => console.error('Error al cerrar sesión:', err));
+  }
+
     </script>
 </body>
 
