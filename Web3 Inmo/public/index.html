@@ -2,117 +2,130 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inmobiliaria Uriangato</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inmobiliaria Uriangato</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-    <header>
-        <div class="top-bar">
-            <span>+52 4451256507</span>
-            <span>InmoUri@gmail.com</span>
-            <div class="social-media">
-                <a href="#"><img src="img/facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="img/instagram-icon.png" alt="Instagram"></a>
-            </div>
+  <header>
+    <div class="top-bar">
+      <span>+52 4451256507</span>
+      <span>InmoUri@gmail.com</span>
+      <div class="social-media">
+        <a href="https://www.facebook.com/"><img src="img/facebook-icon.png" alt="Facebook" /></a>
+        <a href="https://www.instagram.com/"><img src="img/instagram-icon.png" alt="Instagram" /></a>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <div class="logo">
+        <img src="img/logo.png" alt="Inmobiliaria Uriangato" />
+        <span>Inmobiliaria Uriangato</span>
+      </div>
+
+      <!-- Botón de hamburguesa -->
+      <button class="menu-toggle" id="menuToggle">&#9776;</button>
+
+      <nav id="navMenu">
+        <ul>
+          <li id="registroPropiedadButton" style="display: none;"><a href="registro_propiedad.html">Registrar propiedad</a></li>
+          <li id="propiedades"><a href="Compra.html">Propiedades</a></li>
+          <li id="tasa"><a href="#tasaciones">Calculadora</a></li>
+          <li id="administracion" style="display: none;"><a href="administracion_propiedades.html">Administrar Propiedades</a></li>
+          <li id="report"><a href="reportes.html">Reportes</a></li>
+          <li id="contacto"><a href="#contacto" class="btn">Contacto</a></li>
+          <li id="loginButton"><a href="login.html" class="btn">Admin</a></li>
+          <li id="logoutButton" style="display: none;"><a href="#" onclick="logout()">Cerrar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="inicio" class="hero">
+    <div class="hero-content">
+      <h1>Encuentra tu lugar ideal</h1>
+      <div class="buttons">
+        <button><a href="Compra.html">Quiero Comprar</a></button>
+        <button>Quiero Vender</button>
+        <button>Quiero Alquilar</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="soluciones">
+    <div class="soluciones-container">
+      <div class="soluciones-img">
+        <img src="img/edificio.png" alt="Edificio moderno" />
+        <div class="info-card">
+          <p>Equipo formado por expertos en ventas</p>
+          <p>Más de 10 años de experiencia en el rubro</p>
         </div>
-        <div class="nav-bar">
-            <div class="logo">
-                <img src="img/logo.png" alt="Inmobiliaria Uriangato">
-                <span>Inmobiliaria Uriangato</span>
-            </div>
-            <nav>
-                <ul>
-                    <li  id="registroPropiedadButton" style="display: none;"><a href="registro_propiedad.html">Registrar propiedad</a></li>
-                    <li id="propiedades"><a href="Compra.html">Propiedades</a></li>
-                    <li><a href="#tasaciones">Tasaciones</a></li>
-                    <li id="administracion" style="display: none;"><a href="administracion_propiedades.html">Administrar Propiedades</a></li>
-                    <li><a href="#contacto" class="btn">Contacto</a></li>
-                    <li id="loginButton"><a href="login.html" class="btn">Admin</a></li>
-                    <li id="logoutButton" style="display: none;"><a href="#" onclick="logout()">Cerrar Sesión</a></li> 
-                </ul>
-            </nav>
-        </div>
-    </header>
+      </div>
+      <div class="soluciones-texto">
+        <h2>Generando Soluciones</h2>
+        <p>Tu nuevo hogar te está esperando. Nosotros te ayudamos a encontrarlo.</p>
+        <button class="btn-mas">Ver Más</button>
+      </div>
+    </div>
+  </section>
 
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1>Encuentra tu lugar ideal</h1>
-            <div class="buttons">
-                <button><a href="Compra.html">Quiero Comprar</a></button>
-                <button>Quiero Vender</button>
-                <button>Quiero Alquilar</button>
-            </div>
-        </div>
-    </section>
+  <footer class="footer">
+    <p>&copy; 2025 Inmobiliaria Uriangato. Todos los derechos reservados.</p>
+  </footer>
 
-    <section class="soluciones">
-        <div class="soluciones-container">
-            <div class="soluciones-img">
-                <img src="img/edificio.png" alt="Edificio moderno">
-                <div class="info-card">
-                    <p>Equipo formado por expertos en ventas</p>
-                    <p>Más de 10 años de experiencia en el rubro</p>
-                </div>
-            </div>
-            <div class="soluciones-texto">
-                <h2>Generando Soluciones</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ad, facere ipsum accusantium illum.</p>
-                <button class="btn-mas">Ver Más</button>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <p>&copy; 2025 Inmobiliaria Uriangato. Todos los derechos reservados.</p>
-    </footer>
-
-    <script>
-          document.addEventListener("DOMContentLoaded", function () {
-    fetch('http://localhost:3000/session', {
-      method: 'GET',
-      credentials: 'include'
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.ok) {
-          // Hay sesión activa
-          document.getElementById('logoutButton').style.display = 'block';
-          document.getElementById('loginButton').style.display = 'none';
-          document.getElementById('registroPropiedadButton').style.display = 'block';
-          document.getElementById('administracion').style.display= 'block';
-          document.getElementById('propiedades').style.display= 'none';
-
-        } else {
-          // No hay sesión
-          document.getElementById('logoutButton').style.display = 'none';
-          document.getElementById('loginButton').style.display = 'block';
-          document.getElementById('registroPropiedadButton').style.display = 'none';
-          document.getElementById('administracion').style.display= 'none';
-          document.getElementById('propiedades').style.display= 'block';
-
-        }
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch('http://localhost:3000/session', {
+        method: 'GET',
+        credentials: 'include'
       })
-      .catch(err => console.error('Error al verificar sesión:', err));
-  });
+        .then(res => res.json())
+        .then(data => {
+          if (data.ok) {
+            document.getElementById('logoutButton').style.display = 'block';
+            document.getElementById('loginButton').style.display = 'none';
+            document.getElementById('registroPropiedadButton').style.display = 'block';
+            document.getElementById('administracion').style.display = 'block';
+            document.getElementById('propiedades').style.display = 'none';
+            document.getElementById('tasa').style.display = 'none';
+            document.getElementById('contacto').style.display = 'none';
+            document.getElementById('report').style.display= 'block';
 
-  function logout() {
-    fetch('http://localhost:3000/logout', {
-      method: 'POST',
-      credentials: 'include'
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.ok) {
-          window.location.href = 'index.html';
-        }
+          } else {
+            document.getElementById('logoutButton').style.display = 'none';
+            document.getElementById('loginButton').style.display = 'block';
+            document.getElementById('registroPropiedadButton').style.display = 'none';
+            document.getElementById('administracion').style.display = 'none';
+            document.getElementById('propiedades').style.display = 'block';
+            document.getElementById('tasa').style.display = 'block';
+            document.getElementById('tasa').style.display = 'block';
+            document.getElementById('report').style.display= 'none';
+          }
+        })
+        .catch(err => console.error('Error al verificar sesión:', err));
+    });
+
+    function logout() {
+      fetch('http://localhost:3000/logout', {
+        method: 'POST',
+        credentials: 'include'
       })
-      .catch(err => console.error('Error al cerrar sesión:', err));
-  }
+        .then(res => res.json())
+        .then(data => {
+          if (data.ok) {
+            window.location.href = 'index.html';
+          }
+        })
+        .catch(err => console.error('Error al cerrar sesión:', err));
+    }
 
-    </script>
+    // Controlar menú desplegable en móviles
+    document.getElementById("menuToggle").addEventListener("click", function () {
+      document.getElementById("navMenu").classList.toggle("active");
+    });
+  </script>
 </body>
 
 </html>

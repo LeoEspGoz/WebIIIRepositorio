@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adminstracion Propiedades</title>
-    <link rel="stylesheet" href="administracion_propiedades.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Administración Propiedades</title>
+    <link rel="stylesheet" href="administracion_propiedades.css" />
 </head>
 <body>
     <header>
@@ -12,27 +12,54 @@
             <span>+52 4451256507</span>
             <span>InmoUri@gmail.com</span>
             <div class="social-media">
-                <a href="#"><img src="img/facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="img/instagram-icon.png" alt="Instagram"></a>
+                <a href="https://www.facebook.com/"><img src="img/facebook-icon.png" alt="Facebook" /></a>
+                <a href="https://www.instagram.com/"><img src="img/instagram-icon.png" alt="Instagram" /></a>
             </div>
         </div>
+
         <div class="nav-bar">
             <div class="logo">
-                <img src="img/logo.png" alt="Inmobiliaria Uriangato">
+                <img src="img/logo.png" alt="Inmobiliaria Uriangato" />
                 <span>Inmobiliaria Uriangato</span>
             </div>
-            <nav>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+                &#9776;
+            </button>
+
+            <nav id="navMenu" class="nav-menu">
                 <ul>
-                    <li  id="registroPropiedadButton" style="display: none;"><a href="registro_propiedad.html">Registrar propiedad</a></li>
+                    <li id="registroPropiedadButton" style="display: none;">
+                        <a href="registro_propiedad.html">Registrar propiedad</a>
+                    </li>
                     <li><a href="Compra.html">Propiedades</a></li>
-                    <li><a href="#tasaciones">Tasaciones</a></li>
-                    <li><a href="#contacto" class="btn">Contacto</a></li>
+                    <li><a href="reportes.html">Reportes</a></li>
                     <li id="loginButton"><a href="login.html" class="btn">Admin</a></li>
-                    <li id="logoutButton" style="display: none;"><a href="#" onclick="logout()">Cerrar Sesión</a></li> 
+                    <li id="logoutButton" style="display: none;">
+                        <a href="#" onclick="logout()">Cerrar Sesión</a>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
-<script src="administracion_propiedades.js"></script>
+
+    <main>
+        <h1>Administración de Propiedades</h1>
+        <div id="contenedorPropiedades" class="propiedades-grid">
+            <!-- Aquí se insertan dinámicamente las propiedades -->
+        </div>
+    </main>
+    <div id="modalConfirmarEliminar" class="modal">
+  <div class="modal-content">
+    <p>¿Seguro que quieres eliminar esta propiedad?</p>
+    <div class="modal-buttons">
+      <button id="btnCancelar">Cancelar</button>
+      <button id="btnConfirmar">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+    <script src="administracion_propiedades.js"></script>
+    
 </body>
 </html>
