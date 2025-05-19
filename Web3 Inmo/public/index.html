@@ -25,9 +25,10 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="registro_propiedad.html">Registrar propiedad</a></li>
-                    <li><a href="Compra.html">Propiedades</a></li>
+                    <li  id="registroPropiedadButton" style="display: none;"><a href="registro_propiedad.html">Registrar propiedad</a></li>
+                    <li id="propiedades"><a href="Compra.html">Propiedades</a></li>
                     <li><a href="#tasaciones">Tasaciones</a></li>
+                    <li id="administracion" style="display: none;"><a href="administracion_propiedades.html">Administrar Propiedades</a></li>
                     <li><a href="#contacto" class="btn">Contacto</a></li>
                     <li id="loginButton"><a href="login.html" class="btn">Admin</a></li>
                     <li id="logoutButton" style="display: none;"><a href="#" onclick="logout()">Cerrar Sesión</a></li> 
@@ -40,7 +41,7 @@
         <div class="hero-content">
             <h1>Encuentra tu lugar ideal</h1>
             <div class="buttons">
-                <button>Quiero Comprar</button>
+                <button><a href="Compra.html">Quiero Comprar</a></button>
                 <button>Quiero Vender</button>
                 <button>Quiero Alquilar</button>
             </div>
@@ -80,10 +81,18 @@
           // Hay sesión activa
           document.getElementById('logoutButton').style.display = 'block';
           document.getElementById('loginButton').style.display = 'none';
+          document.getElementById('registroPropiedadButton').style.display = 'block';
+          document.getElementById('administracion').style.display= 'block';
+          document.getElementById('propiedades').style.display= 'none';
+
         } else {
           // No hay sesión
           document.getElementById('logoutButton').style.display = 'none';
           document.getElementById('loginButton').style.display = 'block';
+          document.getElementById('registroPropiedadButton').style.display = 'none';
+          document.getElementById('administracion').style.display= 'none';
+          document.getElementById('propiedades').style.display= 'block';
+
         }
       })
       .catch(err => console.error('Error al verificar sesión:', err));

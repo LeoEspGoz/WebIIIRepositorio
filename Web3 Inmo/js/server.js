@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Configuración de sesión
 app.use(session({
-  secret: 'mi_clave_secreta',
+  secret: 'root',
   resave: false,
   saveUninitialized: true,
 }));

@@ -1,11 +1,9 @@
-/* Estilos Generales */
 body, html {
     margin: 0;
     padding: 3px;
     font-family: Arial, sans-serif;
 }
 
-/* Barra Superior */
 .top-bar {
     display: flex;
     justify-content: space-between;
@@ -316,15 +314,16 @@ nav ul li a:hover {
     background-color: #e74c3c;
   }
   #loginButton a {
-    color: #fff;
-    background-color: #55ff33;
+    color: #000000;
+    background-color: #f0f0f0;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
   }
   
   #logintButton a:hover {
-    background-color: #b7ec53;
+    color: #fff;
+    background-color: #000000;
   }
   
 @media (max-width: 768px) {

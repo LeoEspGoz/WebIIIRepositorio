@@ -1,13 +1,16 @@
 /* Estilos generales para el login */
 body {
+    background: url('img/casa2.jpg') no-repeat center center fixed;
+    background-size: cover;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
+    margin-top: 20rem;
     padding: 0;
     display: flex;
     flex-direction: column; /* Esto asegura que el header esté arriba y el main abajo */
     align-items: center;
     min-height: 100vh;
+    color: white;
 }
 
 /* Header en la parte superior */
@@ -83,6 +86,8 @@ button {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
+    align-items: center;
+    margin-left: 40px;
 }
 
 button:hover {

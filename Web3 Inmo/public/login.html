@@ -7,12 +7,18 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
+
     <h1>Inciar sesión</h1>
     <form id="formLogin">
       <input type="text" name="usuario" placeholder="Usuario" required>
       <input type="password" name="contrasena" placeholder="Contraseña" required>
       <button type="submit">Iniciar sesión</button>
     </form>
+
+
+
+
+    <footer id="footer">Derechos reservados 2025</footer>
     <script src="js/login.js">
          document.addEventListener("DOMContentLoaded", function () {
     fetch('http://localhost:3000/session', {

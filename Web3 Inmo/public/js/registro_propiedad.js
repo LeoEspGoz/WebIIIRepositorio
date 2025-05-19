@@ -10,10 +10,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Hay sesión activa
                 document.getElementById('logoutButton').style.display = 'block';
                 document.getElementById('loginButton').style.display = 'none';
+                document.getElementById('registroPropiedadButton').style.display = 'block';
             } else {
                 // No hay sesión
                 document.getElementById('logoutButton').style.display = 'none';
                 document.getElementById('loginButton').style.display = 'block';
+                document.getElementById('registroPropiedadButton').style.display = 'none';
             }
         })
         .catch(err => console.error('Error al verificar sesión:', err));
