@@ -1,39 +1,43 @@
 document.addEventListener('DOMContentLoaded', function () {
   verificarSesion();
+  configurarMenu();
+  configurarModalEliminar();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+function configurarMenu() {
   const menuToggle = document.getElementById('menuToggle');
   const navMenu = document.getElementById('navMenu').querySelector('ul');
 
   menuToggle.addEventListener('click', () => {
     navMenu.classList.toggle('show');
   });
-});
+}
 
 let propiedadAEliminar = null;
 
 function verificarSesion() {
   fetch('http://localhost:3000/session', {
     method: 'GET',
-    credentials: 'include'
+    credentials: 'include',
   })
-  .then(res => res.json())
+  .then(res => {
+    console.log('Status sesión:', res.status);
+    return res.json();
+  })
   .then(data => {
     if (data.ok) {
-      // Mostrar botones de sesión iniciada
+      // Sesión iniciada, mostrar botones
       document.getElementById('registroPropiedadButton').style.display = 'block';
       document.getElementById('logoutButton').style.display = 'block';
       document.getElementById('loginButton').style.display = 'none';
 
       cargarPropiedades();
     } else {
-      // Mostrar solo botón de login
+      // No hay sesión, mostrar solo login y redirigir
       document.getElementById('registroPropiedadButton').style.display = 'none';
       document.getElementById('logoutButton').style.display = 'none';
       document.getElementById('loginButton').style.display = 'block';
 
-      // Redirigir a login si no hay sesión
       window.location.href = 'login.html';
     }
   })
@@ -46,20 +50,44 @@ function verificarSesion() {
 function cargarPropiedades() {
   fetch('http://localhost:3000/api/propiedades', {
     method: 'GET',
-    credentials: 'include'
+    credentials: 'include',
   })
-  .then(res => res.json())
+  .then(res => {
+    console.log('Status propiedades:', res.status);
+    return res.json();
+  })
   .then(data => {
     console.log('Propiedades recibidas:', data);
+
     const contenedor = document.getElementById('contenedorPropiedades');
-    if (!contenedor) return;
+    if (!contenedor) {
+      console.error('No existe contenedorPropiedades');
+      return;
+    }
 
     contenedor.innerHTML = '';
 
-    data.forEach(prop => {
+    if (!data.ok) {
+      contenedor.innerHTML = '<p>Error al cargar propiedades.</p>';
+      return;
+    }
+
+    const propiedades = data.propiedades;
+
+    if (!Array.isArray(propiedades)) {
+      console.error('Propiedades no es un arreglo:', propiedades);
+      contenedor.innerHTML = '<p>Error al cargar propiedades.</p>';
+      return;
+    }
+
+    if (propiedades.length === 0) {
+      contenedor.innerHTML = '<p>No hay propiedades para mostrar.</p>';
+      return;
+    }
+
+    propiedades.forEach(prop => {
       const div = document.createElement('div');
       div.className = 'propiedad-item';
-
       div.innerHTML = `
         <h3>${prop.titulo}</h3>
         <p>${prop.descripcion}</p>
@@ -88,6 +116,10 @@ function cargarPropiedades() {
   })
   .catch(err => {
     console.error('Error al cargar propiedades:', err);
+    const contenedor = document.getElementById('contenedorPropiedades');
+    if (contenedor) {
+      contenedor.innerHTML = '<p>Error al cargar propiedades.</p>';
+    }
   });
 }
 
@@ -96,45 +128,64 @@ function editarPropiedad(id) {
   // Aquí puedes implementar la redirección o abrir modal para editar
 }
 
-// Funciones para modal confirmación eliminar
+// Modal eliminar
+function configurarModalEliminar() {
+  document.getElementById('btnCancelar').addEventListener('click', ocultarModalConfirmacion);
+  document.getElementById('btnConfirmar').addEventListener('click', () => {
+    if (propiedadAEliminar !== null) {
+      eliminarPropiedad(propiedadAEliminar);
+      // ocultarModalConfirmacion se llama después de eliminar exitosamente
+    }
+  });
+}
+
 function mostrarModalConfirmacion(id) {
   propiedadAEliminar = id;
-  const modal = document.getElementById('modalConfirmarEliminar');
-  modal.style.display = 'flex';
+  document.getElementById('modalConfirmacion').style.display = 'block';
+  document.getElementById('modalFondo').style.display = 'block';
 }
 
 function ocultarModalConfirmacion() {
   propiedadAEliminar = null;
-  const modal = document.getElementById('modalConfirmarEliminar');
-  modal.style.display = 'none';
+  document.getElementById('modalConfirmacion').style.display = 'none';
+  document.getElementById('modalFondo').style.display = 'none';
 }
 
-document.getElementById('btnCancelar').addEventListener('click', () => {
-  ocultarModalConfirmacion();
-});
-
-document.getElementById('btnConfirmar').addEventListener('click', () => {
-  if (propiedadAEliminar !== null) {
-    eliminarPropiedad(propiedadAEliminar);
-    ocultarModalConfirmacion();
-  }
-});
-
 function eliminarPropiedad(id) {
-  fetch(`http://localhost:3000/api/propiedades/${id}`, {
+  fetch(`http://localhost:3000/api/propiedad/${id}`, {
     method: 'DELETE',
     credentials: 'include'
   })
   .then(res => res.json())
   .then(data => {
     if (data.ok) {
-      alert('Propiedad eliminada');
-      cargarPropiedades();
+      //alert('Propiedad eliminada');
+      ocultarModalConfirmacion();
+      cargarPropiedades(); // refrescar lista
     } else {
-      alert('Error al eliminar propiedad: ' + (data.error || ''));
+      alert(data.error);
     }
   })
   .catch(err => {
-    console.error('Error al eliminar propiedad:', err);
+    alert('Error al eliminar propiedad');
+    console.error(err);
+  });
+}
+
+function logout() {
+  fetch('http://localhost:3000/logout', {
+    method: 'POST',
+    credentials: 'include',
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.ok) {
+      window.location.href = 'login.html';
+    } else {
+      alert('Error al cerrar sesión');
+    }
+  })
+  .catch(err => {
+    console.error('Error al cerrar sesión:', err);
   });
 }

@@ -67,6 +67,7 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
+    box-shadow: #333;
 }
 
 input {

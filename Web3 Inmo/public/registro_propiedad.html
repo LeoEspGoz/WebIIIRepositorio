@@ -1,77 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Propiedad</title>
-    <link rel="stylesheet" href="registro_propiedad.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registrar Propiedad</title>
+  <link rel="stylesheet" href="registro_propiedad.css" />
 </head>
 <body>
-    <header>
-        <div class="top-bar">
-            <span>+52 4451256507</span>
-            <span>InmoUri@gmail.com</span>
-            <div class="social-media">
-                <a href="https://www.facebook.com/"><img src="img/facebook-icon.png" alt="Facebook" /></a>
-                <a href="https://www.instagram.com/"><img src="img/instagram-icon.png" alt="Instagram" /></a>
-            </div>
-        </div>
-        <div class="nav-bar">
-            <div class="logo">
-                <img src="img/logo.png" alt="Inmobiliaria Uriangato">
-                <span>Inmobiliaria Uriangato</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="registro_propiedad.html">Registrar propiedad</a></li>
-                    <li><a href="Compra.html">Propiedades</a></li>
-                    <li><a href="#tasaciones">Tasaciones</a></li>
-                    <li><a href="#contacto" class="btn">Contacto</a></li>
-                    <li id="loginButton"><a href="login.html" class="btn">Admin</a></li>
-                    <li id="logoutButton" style="display: none;"><a href="#" onclick="logout()">Cerrar Sesión</a></li> 
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <h1>Registrar Propiedad</h1>
-    <form id="registroForm">
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo" required><br><br>
+  <header>
+    <div class="top-bar">
+      <span>+52 4451256507</span>
+      <span>InmoUri@gmail.com</span>
+      <div class="social-media">
+        <a href="https://www.facebook.com/"><img src="img/facebook-icon.png" alt="Facebook" /></a>
+        <a href="https://www.instagram.com/"><img src="img/instagram-icon.png" alt="Instagram" /></a>
+      </div>
+    </div>
 
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" name="descripcion"></textarea><br><br>
+    <div class="nav-bar">
+      <div class="logo">
+        <img src="img/logo.png" alt="Inmobiliaria Uriangato" />
+        <span>Inmobiliaria Uriangato</span>
+      </div>
 
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" name="precio" required><br><br>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
-        <label for="ubicacion">Ubicación:</label>
-        <input type="text" id="ubicacion" name="ubicacion"><br><br>
+      <nav>
+        <ul id="nav-menu">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="registro_propiedad.html">Registrar propiedad</a></li>
+          <li><a href="administracion_propiedades.html" class="btn">Administrar Propiedades</a></li>
+          <li id="loginButton"><a href="login.html" class="btn">Admin</a></li>
+          <li id="logoutButton" style="display: none;"><a href="#" onclick="logout()">Cerrar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-        <label for="tipo">Tipo:</label>
-        <select id="tipo" name="tipo" required>
-            <option value="Casa">Casa</option>
-            <option value="Departamento">Departamento</option>
-            <option value="Terreno">Terreno</option>
-            <option value="Otro">Otro</option>
-        </select><br><br>
+  <h1>Registrar Propiedad</h1>
+  <!-- ⬇⬇ FORMULARIO CON enctype Y CAMPO FILE ⬇⬇ -->
+  <form id="formRegistroPropiedad" enctype="multipart/form-data" method="POST">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required />
 
-        <label for="operacion">Operación:</label>
-        <select id="operacion" name="operacion" required>
-            <option value="Venta">Venta</option>
-            <option value="Renta">Renta</option>
-        </select><br><br>
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" name="descripcion"></textarea>
 
-        <label for="imagen">Imagen URL:</label>
-        <input type="text" id="imagen" name="imagen"><br><br>
+    <label for="precio">Precio:</label>
+    <input type="number" id="precio" name="precio" required />
 
-        <button type="submit">Registrar Propiedad</button>
-    </form>
-    <footer class="footer">
-        <p>&copy; 2025 Inmobiliaria Uriangato. Todos los derechos reservados.</p>
-    </footer>
+    <label for="ubicacion">Ubicación:</label>
+    <input type="text" id="ubicacion" name="ubicacion" />
 
-    <script src="js/registro_propiedad.js">
-    </script>
+    <label for="tipo">Tipo:</label>
+    <select id="tipo" name="tipo" required>
+      <option value="Casa">Casa</option>
+      <option value="Departamento">Departamento</option>
+      <option value="Terreno">Terreno</option>
+      <option value="Otro">Otro</option>
+    </select>
+
+    <label for="operacion">Operación:</label>
+    <select id="operacion" name="operacion" required>
+      <option value="Venta">Venta</option>
+      <option value="Renta">Renta</option>
+    </select>
+
+    <!-- ⬇⬇ CAMPO DE SUBIDA DE IMAGEN ⬇⬇ -->
+    <label for="imagen">Imagen:</label>
+    <input type="file" id="imagen" name="imagen" accept="image/*" required />
+
+    <button type="submit">Registrar Propiedad</button>
+  </form>
+
+  <footer class="footer">
+    <p>&copy; 2025 Inmobiliaria Uriangato. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav-menu").classList.toggle("show");
+    }
+  </script>
+  <script src="js/registro_propiedad.js"></script>
+
+  <!-- Modal de éxito -->
+  <div id="modalExito" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>✅ Propiedad registrada exitosamente</p>
+    </div>
+  </div>
 </body>
 </html>
