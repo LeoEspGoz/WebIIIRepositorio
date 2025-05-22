@@ -1,94 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprar</title>
-    <link rel="stylesheet" href="compra.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comprar</title>
+  <link rel="stylesheet" href="compra.css" />
 </head>
 <body>
-    <header>
-        <div class="top-bar">
-            <span>+52 4451256507</span>
-            <span>InmoUri@gmail.com</span>
-            <div class="social-media">
-                <a href="https://www.facebook.com/"><img src="img/facebook-icon.png" alt="Facebook" /></a>
-                <a href="https://www.instagram.com/"><img src="img/instagram-icon.png" alt="Instagram" /></a>
-            </div>
-        </div>
-        <div class="nav-bar">
-            <div class="logo">
-                <img src="img/logo.png" alt="Inmobiliaria Uriangato">
-                <span>Inmobiliaria Uriangato</span>
-            </div>
-            <nav>
-                <ul>
-                  <li><a href="index.html">Inicio</a></li>
-                    <li><a href="Compra.html">Propiedades</a></li>
-                    <li><a href="#tasaciones">Tasaciones</a></li>
-                    <li><a href="#asesores">Nuestros Asesores</a></li>
-                    <li><a href="#contacto" class="btn">Contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <div class="propiedades-page">
-        <!-- Filtros laterales -->
-        <aside class="filtros">
-          <section>
-            <h2>Tarea</h2>
-            <label><input type="checkbox"> Alquilar</label>
-            <label><input type="checkbox"> Vender</label>
-            <label><input type="checkbox"> Comprar</label>
-          </section>
-      
-          <section>
-            <h2>Tipo de Propiedad</h2>
-            <label><input type="checkbox"> Departamentos</label>
-            <label><input type="checkbox"> Casas</label>
-            <label><input type="checkbox"> Oficinas</label>
-          </section>
-      
-          <!-- Más filtros aquí... -->
-      
-          <button class="btn-filtros">Aplicar Filtros</button>
-        </aside>
-      
-        <!-- Contenido principal -->
-        <main class="resultados">
-          <header class="barra-superior">
-            <h1>Propiedades</h1>
-            <form class="ordenar">
-              <label for="orden">Ordenar por:</label>
-              <select id="orden">
-                <option>Precio</option>
-                <option>Ambientes</option>
-              </select>
-            </form>
-          </header>
-      
-          <!-- Tarjetas -->
-          <section class="tarjetas-container">
-            <article class="tarjeta-propiedad">
-                <div class="imagen-propiedad">
-                    <img src="img/casa.jpg" alt="Imagen de propiedad en Alberdi">
-                  </div>
-              <div class="info">
-                <span class="precio">$52,500/Mes</span>
-                <h2>Oficina, Barrio Alberdi</h2>
-                <p>3 Ambientes - 60 m²</p>
-                <p>3 Baños - 3 Dormitorios</p>
-              </div>
-            </article>
-      
-            <!-- Más <article> aquí... -->
-          </section>
-        </main>
+  <header>
+    <div class="top-bar">
+      <span>+52 4451256507</span>
+      <span>InmoUri@gmail.com</span>
+      <div class="social-media">
+        <a href="https://www.facebook.com/"><img src="img/facebook-icon.png" alt="Facebook" /></a>
+        <a href="https://www.instagram.com/"><img src="img/instagram-icon.png" alt="Instagram" /></a>
       </div>
-      <footer class="footer">
-        <p>&copy; 2025 Inmobiliaria Uriangato. Todos los derechos reservados.</p>
-    </footer>
+    </div>
+    <div class="nav-bar">
+      <div class="logo">
+        <img src="img/logo.png" alt="Inmobiliaria Uriangato" />
+        <span>Inmobiliaria Uriangato</span>
+      </div>
       
+       <button class="menu-toggle" aria-label="Abrir menú">
+    &#9776; <!-- icono hamburguesa -->
+  </button>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="compra.html">Propiedades</a></li>
+          <li><a href="#tasaciones">Tasaciones</a></li>
+          <li><a href="#asesores">Nuestros Asesores</a></li>
+          <li><a href="contacto.html" class="btn">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="propiedades-page">
+    <!-- Filtros laterales -->
+   <aside class="filtros">
+  <section>
+    <h2>Tarea</h2>
+    <label><input type="checkbox" name="tarea" value="Renta"> Renta</label>
+    <label><input type="checkbox" name="tarea" value="Venta"> Venta</label>
+  </section>
+
+  <section>
+    <h2>Tipo de Propiedad</h2>
+    <label><input type="checkbox" name="tipo" value="Departamento"> Departamento</label>
+    <label><input type="checkbox" name="tipo" value="Casa"> Casa</label>
+    <label><input type="checkbox" name="tipo" value="Terreno"> Terreno</label>
+    <label><input type="checkbox" name="tipo" value="Otro"> Otros</label>
+  </section>
+
+  <button class="btn-filtros">Aplicar Filtros</button>
+</aside>
+
+    <!-- Contenido principal -->
+    <main class="resultados">
+      <header class="barra-superior">
+        <h1>Propiedades</h1>
+        <form class="ordenar">
+          <label for="orden">Ordenar por:</label>
+          <select id="orden">
+            <option>Precio</option>
+            <option>Ambientes</option>
+          </select>
+        </form>
+      </header>
+
+      <!-- Contenedor dinámico de propiedades -->
+      <section class="tarjetas-container">
+        <!-- Aquí se cargarán dinámicamente las propiedades con JS -->
+        <p>Cargando propiedades...</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 Inmobiliaria Uriangato. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- JS dinámico -->
+  <script src="js/compra.js"></script>
 </body>
 </html>

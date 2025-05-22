@@ -83,12 +83,11 @@ footer {
 .menu-toggle {
   background: none;
   border: none;
-  color: white;
+  color: white; /* ✅ Asegura que sea blanco */
   font-size: 28px;
   cursor: pointer;
   display: none;
 }
-
 .nav-menu ul {
   list-style: none;
   display: flex;
@@ -245,44 +244,99 @@ h1 {
 .propiedad-item button:last-of-type:hover {
   background-color: #c0392b;
 }
+#logoutButton {
+  background-color: #e74c3c; /* rojo */
+  color: white !important;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#logoutButton:hover {
+  background-color: #c0392b; /* rojo más oscuro al pasar el mouse */
+}
+
 
 /* Responsive */
 
-/* Para tabletas y pantallas medias */
-@media (max-width: 768px) {
-  .nav-menu ul {
-    flex-direction: column;
-    background-color: #004080;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    display: none;
-    padding: 10px 0;
-    border-radius: 0 0 10px 10px;
+@media (max-width: 992px) {
+  .logo {
+    font-size: 18px;
   }
-  .nav-menu ul.show {
-    display: flex;
+
+  .nav-bar {
+    padding: 10px;
   }
-  .menu-toggle {
-    display: block;
+
+  .nav-menu ul li a {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .btn {
+    padding: 6px 12px;
+    font-size: 14px;
   }
 }
 
-/* Para móviles */
+@media (max-width: 768px) {
+  .nav-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-menu {
+    width: 100%;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding-left: 20px;
+  }
+
+  .propiedad-item {
+    padding: 12px;
+  }
+}
+
 @media (max-width: 480px) {
-  .top-bar {
-    font-size: 12px;
-    padding: 8px 15px;
-    justify-content: center;
+  .logo {
+    font-size: 16px;
+    gap: 6px;
   }
-  .top-bar span {
-    margin: 0 10px;
+
+  .logo img {
+    height: 40px;
   }
-  main {
-    padding: 15px 15px 30px;
+
+  .propiedad-item h3 {
+    font-size: 18px;
   }
+
   .propiedad-item p {
+    font-size: 13px;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 15px 20px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-buttons button {
+    width: 100%;
+  }
+
+  footer {
     font-size: 13px;
   }
 }

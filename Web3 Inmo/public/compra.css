@@ -31,6 +31,7 @@ body, html {
   background: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap; /* Permite que los elementos se ajusten si es necesario */
+  position: relative; /* Para posicionar el menú desplegable */
 }
 
 /* Logo de la barra de navegación */
@@ -68,6 +69,16 @@ nav ul li a:hover {
   color: #007BFF;
 }
 
+/* Botón hamburguesa (oculto por defecto) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #007BFF;
+}
+
 /* Estilos para la página de propiedades */
 .propiedades-page {
   display: grid;
@@ -83,7 +94,7 @@ nav ul li a:hover {
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
-.filtros h3 {
+.filtros h2 {
   font-size: 18px;
   margin-top: 15px;
 }
@@ -102,6 +113,13 @@ nav ul li a:hover {
   margin-top: 15px;
   border-radius: 5px;
   cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-filtros:hover {
+  background-color: #0056b3;
 }
 
 /* Contenedor de resultados */
@@ -115,6 +133,7 @@ nav ul li a:hover {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .tarjetas-container {
@@ -123,11 +142,20 @@ nav ul li a:hover {
   gap: 20px;
 }
 
+/* Tarjeta individual de propiedad */
 .tarjeta-propiedad {
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+
+.tarjeta-propiedad:hover {
+  transform: translateY(-5px);
 }
 
 .tarjeta-propiedad img {
@@ -138,16 +166,52 @@ nav ul li a:hover {
 
 .info {
   padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.info h3 {
+  margin: 0 0 10px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
 }
 
 .info .precio {
-  background: #007BFF;
-  color: white;
+  background: #e0e0e0; 
+  color: #333;          
   padding: 5px 10px;
   font-size: 14px;
   border-radius: 4px;
   display: inline-block;
   margin-bottom: 10px;
+  border: 1px solid #ccc; 
+  font-weight: 600;
+}
+
+/* Botón Pedir Informes */
+.btn-informes {
+  margin-top: auto;
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  align-self: stretch;
+  text-align: center;
+}
+
+.btn-informes:hover {
+  background-color: #0056b3;
 }
 
 /* Estilo de la imagen de propiedad */
@@ -178,94 +242,118 @@ nav ul li a:hover {
 /* Media query para pantallas pequeñas */
 @media (max-width: 1024px) {
   .propiedades-page {
-      grid-template-columns: 1fr; /* Muestra una sola columna en tablets */
+    grid-template-columns: 1fr; /* Muestra una sola columna en tablets */
+    padding: 20px;
   }
 
   .barra-superior {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
   .tarjetas-container {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta las tarjetas */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta las tarjetas */
   }
 
   .btn-filtros {
-      width: 100%;
+    width: 100%;
   }
 }
 
 /* Media query para móviles (pantallas pequeñas) */
 @media (max-width: 768px) {
   body, html {
-      padding: 10px;
+    padding: 10px;
   }
 
   .top-bar {
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
   }
 
   .nav-bar {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 10px;
+    flex-direction: row; /* Mantiene logo y botón en fila */
+    align-items: center;
+    padding: 10px;
+    position: relative;
   }
 
+  /* Mostrar botón hamburguesa */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Ocultar el menú por defecto en móvil */
   nav ul {
-      flex-direction: column;
-      width: 100%;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    position: absolute;
+    top: 60px; /* Ajustar según altura de .nav-bar */
+    left: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 0 0 8px 8px;
+    z-index: 10;
+    padding: 10px 0;
+  }
+
+  /* Mostrar menú desplegable cuando tiene clase active */
+  nav ul.active {
+    display: flex;
   }
 
   nav ul li {
-      margin-bottom: 10px;
-      text-align: center;
+    margin: 10px 0;
+    text-align: center;
+    margin-right: 0;
   }
 
   .propiedades-page {
-      grid-template-columns: 1fr;
-      padding: 15px;
+    grid-template-columns: 1fr;
+    padding: 15px;
   }
 
   .filtros {
-      width: 100%;
+    width: 100%;
+    margin-bottom: 20px;
   }
 
   .tarjetas-container {
-      grid-template-columns: 1fr; /* Muestra una sola tarjeta por fila en móviles */
+    grid-template-columns: 1fr; /* Muestra una sola tarjeta por fila en móviles */
   }
 
   .btn-filtros {
-      width: 100%;
+    width: 100%;
   }
 }
 
 /* Media query para pantallas muy pequeñas */
 @media (max-width: 480px) {
   .top-bar {
-      padding: 5px 10px;
+    padding: 5px 10px;
   }
 
   .nav-bar {
-      padding: 10px;
+    padding: 10px;
   }
 
   .logo img {
-      width: 40px;
+    width: 40px;
   }
 
   nav ul li {
-      margin-right: 10px;
+    margin-right: 10px;
   }
 
   .btn-filtros {
-      padding: 12px;
-      font-size: 14px;
+    padding: 12px;
+    font-size: 14px;
   }
 
   .tarjeta-propiedad img {
-      height: 150px; /* Ajusta el tamaño de la imagen de las tarjetas en móviles */
+    height: 150px; /* Ajusta el tamaño de la imagen de las tarjetas en móviles */
   }
 }

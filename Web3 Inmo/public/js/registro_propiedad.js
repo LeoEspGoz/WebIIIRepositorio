@@ -48,4 +48,28 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(() => alert('Error al registrar propiedad'));
     });
   }
+  const logout = () => {
+    fetch('/logout', {
+      method: 'POST',
+      credentials: 'include'
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
+        window.location.href = 'login.html';
+      } else {
+        alert('No se pudo cerrar sesión.');
+      }
+    })
+    .catch(() => alert('Error al cerrar sesión'));
+  };
+
+  // Asociar evento al botón logout si existe
+  const logoutBtn = document.getElementById('logoutButton');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      logout();
+    });
+  }
 });

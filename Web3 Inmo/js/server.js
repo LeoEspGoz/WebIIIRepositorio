@@ -123,16 +123,14 @@ app.post('/api/registrar-propiedad', upload.single('imagen'), (req, res) => {
 
 // Obtener propiedades del usuario
 app.get('/api/propiedades', (req, res) => {
-  if (!req.session.usuario) return res.status(401).json({ ok: false, error: 'No autorizado' });
+  const query = 'SELECT * FROM propiedad';
 
-  const id_admin = req.session.usuario.id_user;
-  const query = 'SELECT * FROM propiedad WHERE id_admin = ?';
-
-  conexion.query(query, [id_admin], (err, resultados) => {
+  conexion.query(query, (err, resultados) => {
     if (err) return res.status(500).json({ ok: false, error: 'Error en la consulta' });
     res.json({ ok: true, propiedades: resultados });
   });
 });
+
 
 // Eliminar propiedad (solo la del usuario)
 app.delete('/api/propiedad/:id', (req, res) => {
@@ -160,6 +158,115 @@ app.delete('/api/propiedad/:id', (req, res) => {
       res.json({ ok: true });
     });
   });
+});
+// Ruta para obtener propiedades filtradas
+app.get('/api/propiedades-filtradas', (req, res) => {
+  const { operacion, tipo } = req.query; // <-- cambio aquí
+  const condiciones = [];
+  const valores = [];
+
+  if (operacion) {
+    const operaciones = operacion.split(',');
+    condiciones.push(`operacion IN (${operaciones.map(() => '?').join(',')})`);
+    valores.push(...operaciones);
+  }
+
+  if (tipo) {
+    const tipos = tipo.split(',');
+    condiciones.push(`tipo IN (${tipos.map(() => '?').join(',')})`);
+    valores.push(...tipos);
+  }
+
+  const whereClause = condiciones.length ? 'WHERE ' + condiciones.join(' AND ') : '';
+  const query = `SELECT * FROM propiedad ${whereClause}`;
+
+  conexion.query(query, valores, (err, resultados) => {
+    if (err) {
+      console.error('Error al filtrar propiedades:', err);
+      return res.status(500).json({ ok: false, error: 'Error en la consulta' });
+    }
+    res.json({ ok: true, propiedades: resultados });
+  });
+}); 
+
+// Middleware para parsear JSON
+app.use(express.json());
+
+// --- Endpoints para Reportes --- //
+
+// 1. Reporte de Propiedades (Filtrado)
+app.get('/reportes/propiedades', async (req, res) => {
+  try {
+    const { tipo, operacion } = req.query;
+    let query = `
+      SELECT 
+        id, titulo, precio, ubicacion, tipo, operacion, 
+        DATE(fecha_publicacion) as fecha
+      FROM propiedad
+      WHERE 1=1
+    `;
+
+    if (tipo) query += ` AND tipo = '${tipo}'`;
+    if (operacion) query += ` AND operacion = '${operacion}'`;
+
+    query += ' ORDER BY fecha_publicacion DESC;';
+    const [rows] = await pool.query(query);
+    res.json(rows);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener propiedades' });
+  }
+});
+
+// 2. Resumen Estadístico
+app.get('/reportes/estadisticas', async (req, res) => {
+  try {
+    const [general] = await pool.query(`
+      SELECT 
+        COUNT(*) as total_propiedades,
+        AVG(precio) as precio_promedio,
+        SUM(operacion = 'Venta') as ventas,
+        SUM(operacion = 'Renta') as rentas
+      FROM propiedad
+    `);
+
+    const [porTipo] = await pool.query(`
+      SELECT 
+        tipo,
+        COUNT(*) as cantidad,
+        AVG(precio) as precio_promedio
+      FROM propiedad
+      GROUP BY tipo
+    `);
+
+    res.json({ general: general[0], porTipo });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al generar estadísticas' });
+  }
+});
+
+// 3. Actividad del Administrador
+app.get('/reportes/admin-actividad', async (req, res) => {
+  try {
+    const [rows] = await pool.query(`
+      SELECT 
+        p.id, p.titulo, p.precio, p.tipo, p.operacion,
+        DATE(p.fecha_publicacion) as fecha,
+        u.nombre as admin
+      FROM propiedad p
+      JOIN usuario u ON p.id_admin = u.id_user
+      WHERE u.id_user = 1  /* Asume que el admin tiene ID=1 */
+      ORDER BY p.fecha_publicacion DESC
+    `);
+    res.json(rows);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener actividad del admin' });
+  }
 });
 
 app.listen(PORT, () => {

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contacto - Inmobiliaria Uriangato</title>
+  <link rel="stylesheet" href="contacto.css" />
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <span>+52 4451256507</span>
+      <span>InmoUri@gmail.com</span>
+      <div class="social-media">
+        <a href="https://www.facebook.com/"><img src="img/facebook-icon.png" alt="Facebook" /></a>
+        <a href="https://www.instagram.com/"><img src="img/instagram-icon.png" alt="Instagram" /></a>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <div class="logo">
+        <img src="img/logo.png" alt="Inmobiliaria Uriangato" />
+        <span>Inmobiliaria Uriangato</span>
+      </div>
+      
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="compra.html">Propiedades</a></li>
+          <li><a href="#tasaciones">Tasaciones</a></li>
+          <li><a href="#asesores">Nuestros Asesores</a></li>
+          <li><a href="contacto.html" class="btn">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Sección solo visible si se pasa info de propiedad -->
+    <section id="info-propiedad" style="display: none;">
+      <h2>Información de la propiedad seleccionada</h2>
+      <p><strong>Título:</strong> <span id="prop-titulo"></span></p>
+      <p><strong>Precio:</strong> <span id="prop-precio"></span></p>
+      <p><strong>Descripción:</strong> <span id="prop-descripcion"></span></p>
+    </section>
+
+    <section id="form-contacto">
+      <h2>Envía tu consulta</h2>
+      <form id="contactForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/contacto.js"></script>
+  <footer class="footer">
+    <p>&copy; 2025 Inmobiliaria Uriangato. Todos los derechos reservados.</p>
+  </footer>
+<!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Tu mensaje fue enviado.</p>
+  </div>
+</div>
+</body>
+
+</html>
